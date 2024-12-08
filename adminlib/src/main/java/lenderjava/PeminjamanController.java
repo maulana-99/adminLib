@@ -4,17 +4,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.DateCell;
+import javafx.util.Callback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class PeminjamanController {
     @FXML
@@ -40,6 +44,12 @@ public class PeminjamanController {
 
     @FXML
     private TextField dataBuku;
+
+    @FXML
+    private TextField dataQtyBuku;
+
+    @FXML
+    private DatePicker dataPengembalian;
 
     private ObservableList<Member> memberList = FXCollections.observableArrayList();
     private ObservableList<Buku> bukuList = FXCollections.observableArrayList();
@@ -101,6 +111,42 @@ public class PeminjamanController {
                     selectedBukuId = newValue.getId();
                     dataBuku.setText(newValue.getJudul());
                 }
+            }
+        });
+
+        // Set initial value and add listener for dataQtyBuku
+        dataQtyBuku.setText("1");
+        dataQtyBuku.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                dataQtyBuku.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            if (!dataQtyBuku.getText().isEmpty()) {
+                int value = Integer.parseInt(dataQtyBuku.getText());
+                if (value < 1) {
+                    dataQtyBuku.setText("1");
+                } else if (value > 3) {
+                    dataQtyBuku.setText("3");
+                }
+            }
+        });
+
+        // Set initial date for dataPengembalian to today
+        dataPengembalian.setValue(LocalDate.now());
+
+        // Restrict date selection to today and future dates
+        dataPengembalian.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(LocalDate.now())) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #EEEEEE;");
+                        }
+                    }
+                };
             }
         });
     }

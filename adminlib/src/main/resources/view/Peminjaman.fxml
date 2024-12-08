@@ -27,9 +27,9 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="dataMember" layoutX="21.0" layoutY="398.0" />
-      <TextField fx:id="dataBuku" layoutX="21.0" layoutY="434.0" />
-      <TextField fx:id="dataQtyBuku" layoutX="21.0" layoutY="471.0" text="1" />
+      <TextField fx:id="dataMember" editable="false" layoutX="21.0" layoutY="398.0" promptText="member..." />
+      <TextField fx:id="dataBuku" editable="false" layoutX="21.0" layoutY="434.0" promptText="buku..." />
+      <TextField fx:id="dataQtyBuku" layoutX="21.0" layoutY="471.0" promptText="Qty..." text="1" />
       <DatePicker fx:id="dataPengembalian" layoutX="21.0" layoutY="508.0" />
       <Button fx:id="Pinjam" layoutX="21.0" layoutY="550.0" mnemonicParsing="false" text="Konfirmasi" />
       <TableView fx:id="tblPeminjaman" layoutX="422.0" layoutY="360.0" prefHeight="200.0" prefWidth="338.0" />
