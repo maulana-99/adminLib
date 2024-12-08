@@ -85,7 +85,10 @@ public class PeminjamanController {
         TableColumn<Buku, String> pengarangColumn = new TableColumn<>("Pengarang");
         pengarangColumn.setCellValueFactory(new PropertyValueFactory<>("pengarang"));
 
-        tblSrcBuku.getColumns().addAll(bukuIdColumn, judulColumn, pengarangColumn);
+        TableColumn<Buku, Integer> stockColumn = new TableColumn<>("Stock");
+        stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
+        tblSrcBuku.getColumns().addAll(bukuIdColumn, judulColumn, pengarangColumn, stockColumn);
         tblSrcBuku.setItems(bukuList);
 
         // Load all members and books initially
@@ -171,7 +174,7 @@ public class PeminjamanController {
 
     private void loadAllBooks() {
         bukuList.clear();
-        String query = "SELECT id, judul, pengarang FROM buku";
+        String query = "SELECT id, judul, pengarang, stock FROM buku WHERE stock > 0";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -180,7 +183,8 @@ public class PeminjamanController {
                 int id = resultSet.getInt("id");
                 String judul = resultSet.getString("judul");
                 String pengarang = resultSet.getString("pengarang");
-                bukuList.add(new Buku(id, judul, pengarang));
+                int stock = resultSet.getInt("stock");
+                bukuList.add(new Buku(id, judul, pengarang, stock));
             }
         } catch (SQLException e) {
             System.out.println("Error loading books: " + e.getMessage());
@@ -214,7 +218,7 @@ public class PeminjamanController {
         String searchText = srcBukuPeminjaman.getText().toLowerCase();
         bukuList.clear();
 
-        String query = "SELECT id, judul, pengarang FROM buku WHERE LOWER(judul) LIKE ? OR LOWER(pengarang) LIKE ?";
+        String query = "SELECT id, judul, pengarang, stock FROM buku WHERE LOWER(judul) LIKE ? OR LOWER(pengarang) LIKE ? ";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -226,7 +230,8 @@ public class PeminjamanController {
                 int id = resultSet.getInt("id");
                 String judul = resultSet.getString("judul");
                 String pengarang = resultSet.getString("pengarang");
-                bukuList.add(new Buku(id, judul, pengarang));
+                int stock = resultSet.getInt("stock");
+                bukuList.add(new Buku(id, judul, pengarang, stock));
             }
         } catch (SQLException e) {
             System.out.println("Error searching book: " + e.getMessage());
@@ -261,11 +266,13 @@ public class PeminjamanController {
         private int id;
         private String judul;
         private String pengarang;
+        private int stock;
 
-        public Buku(int id, String judul, String pengarang) {
+        public Buku(int id, String judul, String pengarang, int stock) {
             this.id = id;
             this.judul = judul;
             this.pengarang = pengarang;
+            this.stock = stock;
         }
 
         public int getId() {
@@ -278,6 +285,10 @@ public class PeminjamanController {
 
         public String getPengarang() {
             return pengarang;
+        }
+
+        public int getStock() {
+            return stock;
         }
     }
 }
