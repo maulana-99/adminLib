@@ -51,8 +51,18 @@ public class PeminjamanController {
     @FXML
     private DatePicker dataPengembalian;
 
+    @FXML
+    private Button Pinjam;
+
+    @FXML
+    private Button hapusPeminjaman;
+
+    @FXML
+    private TableView<Peminjaman> tblPeminjaman;
+
     private ObservableList<Member> memberList = FXCollections.observableArrayList();
     private ObservableList<Buku> bukuList = FXCollections.observableArrayList();
+    private ObservableList<Peminjaman> peminjamanList = FXCollections.observableArrayList();
 
     private int selectedMemberId;
     private int selectedBukuId;
@@ -61,6 +71,8 @@ public class PeminjamanController {
     public void initialize() {
         btnSrcMemberPeminjaman.setOnAction(event -> searchMember());
         btnSrcBukuPeminjaman.setOnAction(event -> searchBuku());
+        Pinjam.setOnAction(event -> addPeminjaman());
+        hapusPeminjaman.setOnAction(event -> deletePeminjaman());
 
         // Set up the member table columns
         TableColumn<Member, Integer> idColumn = new TableColumn<>("ID");
@@ -90,6 +102,25 @@ public class PeminjamanController {
 
         tblSrcBuku.getColumns().addAll(bukuIdColumn, judulColumn, pengarangColumn, stockColumn);
         tblSrcBuku.setItems(bukuList);
+
+        // Set up the peminjaman table columns
+        TableColumn<Peminjaman, Integer> peminjamanMemberIdColumn = new TableColumn<>("Member ID");
+        peminjamanMemberIdColumn.setCellValueFactory(new PropertyValueFactory<>("memberId"));
+
+        TableColumn<Peminjaman, String> peminjamanMemberNameColumn = new TableColumn<>("Nama Member");
+        peminjamanMemberNameColumn.setCellValueFactory(new PropertyValueFactory<>("namaMember"));
+
+        TableColumn<Peminjaman, Integer> peminjamanBukuIdColumn = new TableColumn<>("Buku ID");
+        peminjamanBukuIdColumn.setCellValueFactory(new PropertyValueFactory<>("bukuId"));
+
+        TableColumn<Peminjaman, String> peminjamanBukuTitleColumn = new TableColumn<>("Judul Buku");
+        peminjamanBukuTitleColumn.setCellValueFactory(new PropertyValueFactory<>("judulBuku"));
+
+        TableColumn<Peminjaman, Integer> peminjamanQtyColumn = new TableColumn<>("Qty");
+        peminjamanQtyColumn.setCellValueFactory(new PropertyValueFactory<>("qty"));
+
+        tblPeminjaman.getColumns().addAll(peminjamanMemberIdColumn, peminjamanMemberNameColumn, peminjamanBukuIdColumn, peminjamanBukuTitleColumn, peminjamanQtyColumn);
+        tblPeminjaman.setItems(peminjamanList);
 
         // Load all members and books initially
         loadAllMembers();
@@ -152,6 +183,24 @@ public class PeminjamanController {
                 };
             }
         });
+    }
+
+    private void addPeminjaman() {
+        String namaMember = dataMember.getText();
+        String judulBuku = dataBuku.getText();
+        int qty = Integer.parseInt(dataQtyBuku.getText());
+
+        if (!namaMember.isEmpty() && !judulBuku.isEmpty() && qty > 0) {
+            Peminjaman peminjaman = new Peminjaman(selectedMemberId, namaMember, selectedBukuId, judulBuku, qty);
+            peminjamanList.add(peminjaman);
+        }
+    }
+
+    private void deletePeminjaman() {
+        Peminjaman selectedPeminjaman = tblPeminjaman.getSelectionModel().getSelectedItem();
+        if (selectedPeminjaman != null) {
+            peminjamanList.remove(selectedPeminjaman);
+        }
     }
 
     private void loadAllMembers() {
@@ -289,6 +338,42 @@ public class PeminjamanController {
 
         public int getStock() {
             return stock;
+        }
+    }
+
+    public static class Peminjaman {
+        private int memberId;
+        private String namaMember;
+        private int bukuId;
+        private String judulBuku;
+        private int qty;
+
+        public Peminjaman(int memberId, String namaMember, int bukuId, String judulBuku, int qty) {
+            this.memberId = memberId;
+            this.namaMember = namaMember;
+            this.bukuId = bukuId;
+            this.judulBuku = judulBuku;
+            this.qty = qty;
+        }
+
+        public int getMemberId() {
+            return memberId;
+        }
+
+        public String getNamaMember() {
+            return namaMember;
+        }
+
+        public int getBukuId() {
+            return bukuId;
+        }
+
+        public String getJudulBuku() {
+            return judulBuku;
+        }
+
+        public int getQty() {
+            return qty;
         }
     }
 }

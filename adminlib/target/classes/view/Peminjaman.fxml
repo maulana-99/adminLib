@@ -6,34 +6,44 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lenderjava.PeminjamanController">
    <children>
-      <Label layoutX="21.0" layoutY="23.0" text="Peminjaman">
+      <Label layoutX="22.0" layoutY="90.0" text="Peminjaman">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <TableView fx:id="tblSrcMember" layoutX="21.0" layoutY="103.0" prefHeight="200.0" prefWidth="338.0" />
-      <Button fx:id="btnSrcMemberPeminjaman" layoutX="272.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="Cari" />
-      <TextField fx:id="srcMemberPeminjaman" layoutX="21.0" layoutY="68.0" prefHeight="26.0" prefWidth="231.0" />
-      <TableView fx:id="tblSrcBuku" layoutX="422.0" layoutY="103.0" prefHeight="200.0" prefWidth="338.0" />
-      <Button fx:id="btnSrcBukuPeminjaman" layoutX="673.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="Cari" />
-      <TextField fx:id="srcBukuPeminjaman" layoutX="422.0" layoutY="68.0" prefHeight="26.0" prefWidth="231.0" />
-      <Label fx:id="lError" layoutX="21.0" layoutY="341.0" text="Error" textFill="RED">
+      <TableView fx:id="tblSrcMember" layoutX="22.0" layoutY="170.0" prefHeight="200.0" prefWidth="338.0" />
+      <Button fx:id="btnSrcMemberPeminjaman" layoutX="273.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="Cari" />
+      <TextField fx:id="srcMemberPeminjaman" layoutX="22.0" layoutY="135.0" prefHeight="26.0" prefWidth="231.0" />
+      <TableView fx:id="tblSrcBuku" layoutX="466.0" layoutY="170.0" prefHeight="200.0" prefWidth="338.0" />
+      <Button fx:id="btnSrcBukuPeminjaman" layoutX="717.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="Cari" />
+      <TextField fx:id="srcBukuPeminjaman" layoutX="466.0" layoutY="135.0" prefHeight="26.0" prefWidth="231.0" />
+      <Label fx:id="lError" layoutX="22.0" layoutY="408.0" text="Error" textFill="RED">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="dataMember" editable="false" layoutX="21.0" layoutY="398.0" promptText="member..." />
-      <TextField fx:id="dataBuku" editable="false" layoutX="21.0" layoutY="434.0" promptText="buku..." />
-      <TextField fx:id="dataQtyBuku" layoutX="21.0" layoutY="471.0" promptText="Qty..." text="1" />
-      <DatePicker fx:id="dataPengembalian" layoutX="21.0" layoutY="508.0" />
-      <Button fx:id="Pinjam" layoutX="21.0" layoutY="550.0" mnemonicParsing="false" text="Konfirmasi" />
-      <TableView fx:id="tblPeminjaman" layoutX="422.0" layoutY="360.0" prefHeight="200.0" prefWidth="338.0" />
-      <Button fx:id="konfimasiPeminjaman" layoutX="422.0" layoutY="576.0" mnemonicParsing="false" text="Konfirmasi" />
-      <Button fx:id="hapusPeminjaman" layoutX="771.0" layoutY="362.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="Hapus" />
+      <TextField fx:id="dataMember" editable="false" layoutX="22.0" layoutY="449.0" promptText="member..." />
+      <TextField fx:id="dataBuku" editable="false" layoutX="22.0" layoutY="485.0" promptText="buku..." />
+      <TextField fx:id="dataQtyBuku" layoutX="22.0" layoutY="522.0" promptText="Qty..." text="1" />
+      <DatePicker fx:id="dataPengembalian" layoutX="22.0" layoutY="559.0" promptText="Pengembalian..." />
+      <Button fx:id="Pinjam" layoutX="22.0" layoutY="601.0" mnemonicParsing="false" text="Pinjam" />
+      <TableView fx:id="tblPeminjaman" layoutX="360.0" layoutY="427.0" prefHeight="200.0" prefWidth="444.0" />
+      <Button fx:id="konfimasiPeminjaman" layoutX="815.0" layoutY="601.0" mnemonicParsing="false" text="Konfirmasi" />
+      <Button fx:id="hapusPeminjaman" layoutX="815.0" layoutY="429.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="Hapus" />
+      <Pane layoutX="2.0" prefHeight="80.0" prefWidth="1000.0" style="-fx-background-color: #3333;">
+         <children>
+            <Button layoutX="22.0" layoutY="27.0" mnemonicParsing="false" text="Peminjaman" />
+            <Button layoutX="123.0" layoutY="27.0" mnemonicParsing="false" text="Pengembalian" />
+            <Button layoutX="239.0" layoutY="27.0" mnemonicParsing="false" text="Crud Buku" />
+            <Button layoutX="331.0" layoutY="27.0" mnemonicParsing="false" text="Crud Kategori" />
+            <Button layoutX="442.0" layoutY="27.0" mnemonicParsing="false" text="Crud Member" />
+            <Button layoutX="924.0" layoutY="27.0" mnemonicParsing="false" text="Logout" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
