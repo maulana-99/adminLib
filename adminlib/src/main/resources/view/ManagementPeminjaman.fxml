@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lenderjava.ManagementPeminjamanController">
+   <children>
+      <Pane prefHeight="80.0" prefWidth="1000.0" style="-fx-background-color: #3333;">
+         <children>
+            <Button fx:id="btnPeminjaman" layoutX="22.0" layoutY="27.0" mnemonicParsing="false" text="Peminjaman" />
+            <Button fx:id="btnPengembalian" layoutX="123.0" layoutY="27.0" mnemonicParsing="false" text="Pengembalian" />
+            <Button fx:id="btnBuku" layoutX="239.0" layoutY="27.0" mnemonicParsing="false" text="Crud Buku" />
+            <Button fx:id="btnKategori" layoutX="331.0" layoutY="27.0" mnemonicParsing="false" text="Crud Kategori" />
+            <Button fx:id="btnMember" layoutX="442.0" layoutY="27.0" mnemonicParsing="false" text="Crud Member" />
+            <Button fx:id="btnLogout" layoutX="924.0" layoutY="27.0" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="btnMPeminjaman" layoutX="553.0" layoutY="27.0" mnemonicParsing="false" text="Mngmnt Peminjaman" />
+            <Button fx:id="btnMPengembalian" layoutX="715.0" layoutY="27.0" mnemonicParsing="false" text="Mngmnt Pengembalian" />
+         </children>
+      </Pane>
+      <TableView fx:id="tblPeminjamanManagement" layoutX="25.0" layoutY="232.0" prefHeight="268.0" prefWidth="950.0" />
+      <DatePicker fx:id="fltrPeminjaman" layoutX="25.0" layoutY="134.0" promptText="Peminjaman..." />
+      <DatePicker fx:id="fltrPengembalian" layoutX="224.0" layoutY="134.0" promptText="Pengembalian..." />
+      <TextField fx:id="fltrNJ" layoutX="25.0" layoutY="181.0" prefHeight="26.0" prefWidth="284.0" promptText="masukan nama atau judul..." />
+      <Button fx:id="btnfltr" layoutX="323.0" layoutY="181.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Search" />
+      <ButtonBar layoutX="94.0" layoutY="550.0" prefHeight="40.0" prefWidth="200.0" />
+      <Button fx:id="RefreshData" layoutX="893.0" layoutY="181.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Refresh" />
+      <Button fx:id="prntPeminjamanManagement" layoutX="25.0" layoutY="524.0" mnemonicParsing="false" text="Print" />
+      <ComboBox fx:id="fltrBulanPeminjaman" layoutX="432.0" layoutY="134.0" prefWidth="150.0" promptText="Filter Bulan" />
+   </children>
+</AnchorPane>

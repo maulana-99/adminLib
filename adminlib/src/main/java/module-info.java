@@ -5,7 +5,9 @@ module lenderjava {
     requires java.logging;
     requires javafx.base;
     requires javafx.graphics;
-    requires transitive  java.sql;
+    requires org.apache.fontbox;
+    requires org.apache.pdfbox;
+    requires transitive java.sql;
 
     opens lenderjava to javafx.fxml;
     exports lenderjava;

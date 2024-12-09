@@ -35,14 +35,16 @@
       <TableView fx:id="tblPeminjaman" layoutX="360.0" layoutY="427.0" prefHeight="200.0" prefWidth="444.0" />
       <Button fx:id="konfimasiPeminjaman" layoutX="815.0" layoutY="601.0" mnemonicParsing="false" text="Konfirmasi" />
       <Button fx:id="hapusPeminjaman" layoutX="815.0" layoutY="429.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="Hapus" />
-      <Pane layoutX="2.0" prefHeight="80.0" prefWidth="1000.0" style="-fx-background-color: #3333;">
+      <Pane prefHeight="80.0" prefWidth="1000.0" style="-fx-background-color: #3333;">
          <children>
-            <Button layoutX="22.0" layoutY="27.0" mnemonicParsing="false" text="Peminjaman" />
-            <Button layoutX="123.0" layoutY="27.0" mnemonicParsing="false" text="Pengembalian" />
-            <Button layoutX="239.0" layoutY="27.0" mnemonicParsing="false" text="Crud Buku" />
-            <Button layoutX="331.0" layoutY="27.0" mnemonicParsing="false" text="Crud Kategori" />
-            <Button layoutX="442.0" layoutY="27.0" mnemonicParsing="false" text="Crud Member" />
-            <Button layoutX="924.0" layoutY="27.0" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="btnPeminjaman" layoutX="22.0" layoutY="27.0" mnemonicParsing="false" text="Peminjaman" />
+            <Button fx:id="btnPengembalian" layoutX="123.0" layoutY="27.0" mnemonicParsing="false" text="Pengembalian" />
+            <Button fx:id="btnBuku" layoutX="239.0" layoutY="27.0" mnemonicParsing="false" text="Crud Buku" />
+            <Button fx:id="btnKategori" layoutX="331.0" layoutY="27.0" mnemonicParsing="false" text="Crud Kategori" />
+            <Button fx:id="btnMember" layoutX="442.0" layoutY="27.0" mnemonicParsing="false" text="Crud Member" />
+            <Button fx:id="btnLogout" layoutX="924.0" layoutY="27.0" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="btnMPeminjaman" layoutX="553.0" layoutY="27.0" mnemonicParsing="false" text="Mngmnt Peminjaman" />
+            <Button fx:id="btnMPengembalian" layoutX="715.0" layoutY="27.0" mnemonicParsing="false" text="Mngmnt Pengembalian" />
          </children>
       </Pane>
    </children>

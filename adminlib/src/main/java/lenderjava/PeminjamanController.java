@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -58,7 +59,16 @@ public class PeminjamanController {
     private Button hapusPeminjaman;
 
     @FXML
+    private Button konfimasiPeminjaman;
+
+    @FXML
     private TableView<Peminjaman> tblPeminjaman;
+
+    @FXML
+    private Button btnLogout;
+
+    @FXML
+    private Label lError;
 
     private ObservableList<Member> memberList = FXCollections.observableArrayList();
     private ObservableList<Buku> bukuList = FXCollections.observableArrayList();
@@ -73,6 +83,7 @@ public class PeminjamanController {
         btnSrcBukuPeminjaman.setOnAction(event -> searchBuku());
         Pinjam.setOnAction(event -> addPeminjaman());
         hapusPeminjaman.setOnAction(event -> deletePeminjaman());
+        konfimasiPeminjaman.setOnAction(event -> confirmPeminjaman());
 
         // Set up the member table columns
         TableColumn<Member, Integer> idColumn = new TableColumn<>("ID");
@@ -125,6 +136,11 @@ public class PeminjamanController {
         // Load all members and books initially
         loadAllMembers();
         loadAllBooks();
+
+        btnLogout.setOnAction(event -> {
+            LoginController.logout();
+            SceneManager.switchScene("/view/Login.fxml");
+        });
 
         // Add listener for member selection
         tblSrcMember.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Member>() {
@@ -200,6 +216,28 @@ public class PeminjamanController {
         Peminjaman selectedPeminjaman = tblPeminjaman.getSelectionModel().getSelectedItem();
         if (selectedPeminjaman != null) {
             peminjamanList.remove(selectedPeminjaman);
+        }
+    }
+
+    private void confirmPeminjaman() {
+        String query = "INSERT INTO peminjaman (id_member, id_buku, tanggal_peminjaman, tanggal_pengembalian, qty, create_by) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            for (Peminjaman peminjaman : peminjamanList) {
+                preparedStatement.setInt(1, peminjaman.getMemberId());
+                preparedStatement.setInt(2, peminjaman.getBukuId());
+                preparedStatement.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+                preparedStatement.setDate(4, java.sql.Date.valueOf(dataPengembalian.getValue()));
+                preparedStatement.setInt(5, peminjaman.getQty());
+                preparedStatement.setString(6, LoginController.getLoggedInUserEmail());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+            peminjamanList.clear();
+            lError.setText("");
+        } catch (SQLException e) {
+            lError.setText("Error confirming peminjaman: " + e.getMessage());
         }
     }
 

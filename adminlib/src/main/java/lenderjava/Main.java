@@ -19,7 +19,7 @@ public class Main extends Application {
         SceneManager.setStage(primaryStage);
 
         // Panggil scene awal
-        SceneManager.switchScene("/view/Peminjaman.fxml");
+        SceneManager.switchScene("/view/ManagementPeminjaman.fxml");
     }
 
     public static void main(String[] args) {

@@ -56,7 +56,7 @@ public class LoginController {
 
             messageText.setText("Login berhasil!");
 
-            SceneManager.switchScene("/view/Dashboard.fxml");
+            SceneManager.switchScene("/view/Peminjaman.fxml");
         } else {
             messageText.setText("Email atau password salah.");
         }
@@ -96,5 +96,11 @@ public class LoginController {
 
     public static String getLoggedInUsername() {
         return loggedInUsername;
+    }
+
+    public static void logout() {
+        loggedInUserEmail = null;
+        loggedInUsername = null;
+        System.out.println("User telah logout dan data telah dibersihkan.");
     }
 }
